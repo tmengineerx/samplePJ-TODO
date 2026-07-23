@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="sample.common.dao.mapper.LoginMapper">
+
+    <!-- 一覧取得 -->
+    <select id="findByUsername" resultType="sample.common.dao.entity.Task">
+    	SELECT *
+    	FROM tasks
+    	WHERE username = #{username}
+    	ORDER BY id DESC
+    </select>
+
+    <!-- 1件取得 -->
+    <select id="findById" resultType="sample.common.dao.entity.Login">
+		SELECT *
+		FROM tasks
+		WHERE id = #{id}
+			AND username = #{username}
+	</select>
+		
+    <!-- 登録 -->
+	<insert id="insert">
+		INSERT INTO tasks(
+			username,
+			title,
+			content,
+			name,
+			start_date,
+			end_date
+		)
+		VALUES(
+			#{username},
+			#{title},
+			#{content},
+			#{name},
+			#{startDate},
+			#{endDate}
+		)
+	</insert>
+	
+    <!-- 更新 -->
+    <update id="update">
+    	UPDATE tasks
+    	SET
+    		title = #{title},
+    		content = #{content},
+    		name = #{name},
+    		start_date = #{startDate},
+    		end_date = #{endDate}
+    	WHERE id = #{id}
+    		AND username = #{username}
+    </update>
+
+    <!-- 削除 -->
+    <delete id="delete">
+    	DELETE FROM tasks
+    	WHERE id = #{id}
+    		AND username = #{username}
+    </delete>
+
+</mapper>
