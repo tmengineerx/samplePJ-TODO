@@ -1,10 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>タスク編集</title>
 </head>
 <body>
-
+	<h1>タスク編集</h1>
+	
+	<form th:action="@{/tasks/update/{id}(id=${task.id})}" method="post">
+		<label>タイトル：<input type="text" name="title" th:value="${task.title}"></label>
+		<br>
+		<label>内容：<textarea name="content" th:text="${task.content}"></textarea></label>
+		<br>
+		<label>名前：<input type="text" name="name" th:value="${task.name}"></label>
+		<br>
+		<label>開始日：<input type="date" name="startDate" th:value="${task.startDate}"></label>
+		<br>
+		<label>終了日：<input type="date" name="endDate" th:value="${task.endDate}"></label>
+		<br>
+		<button type="submit">完了</button>		
+	</form>
+	
+	<p><a href="/tasks">一覧に戻る</a></p>
 </body>
 </html>

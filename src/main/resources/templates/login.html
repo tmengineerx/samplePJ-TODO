@@ -2,9 +2,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ログイン</title>
 </head>
 <body>
-
+	<h1>ログイン</h1>
+	
+	<form action="/login" method="post">
+		<label>ユーザー名：<input type="text" name="username"></label>
+		<br>
+		<label>パスワード：<input type="password" name="password"></label>
+		<br>
+		<button type="submit">ログイン</button>
+	</form>
+	
+	<p><a href="/register">ユーザー登録はこちら</a></p>
 </body>
 </html>
