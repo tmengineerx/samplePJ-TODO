@@ -4,7 +4,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="sample.common.dao.mapper.LoginMapper">
+<mapper namespace="sample.common.dao.mapper.TaskMapper">
 
     <!-- 一覧取得 -->
     <select id="findByUsername" resultType="sample.common.dao.entity.Task">
@@ -15,7 +15,7 @@
     </select>
 
     <!-- 1件取得 -->
-    <select id="findById" resultType="sample.common.dao.entity.Login">
+    <select id="findById" resultType="sample.common.dao.entity.Task">
 		SELECT *
 		FROM tasks
 		WHERE id = #{id}
