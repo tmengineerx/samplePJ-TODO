@@ -6,7 +6,7 @@
 <title>ログイン</title>
 </head>
 <body>
-	<div class="container">
+	<div class="container form-page">
 		<h1>ログイン</h1>
 		
 		<div class="error-message" th:if="${error}" th:text="${error}"></div>
@@ -15,7 +15,7 @@
 			<br>
 			<label>パスワード：<input type="password" name="password"></label>
 			<br>
-			<button type="submit">ログイン</button>
+			<button type="submit" class="btn-full">ログイン</button>
 		</form>
 		
 		<p><a href="/register">ユーザー登録はこちら</a></p>

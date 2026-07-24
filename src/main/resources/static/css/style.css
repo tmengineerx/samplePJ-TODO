@@ -10,21 +10,99 @@ h1 {
 	color: #2f3542;
 	margin: 0 0 20px 0;
 	font-size: 24px;
-}
-
-/* タスク一覧のような、濃い背景の見出し用 */
-h1.page-header {
-	background-color: #2f3542;
-	color: #ffffff;
-	margin: 0 0 20px 0;
-	padding: 20px 30px;
-	border-radius: 8px;
+	text-align: center;
 }
 
 .container {
 	max-width: 900px;
 	margin: 30px auto;
 	padding: 0 20px;
+}
+
+/* タスク一覧のような、列数の多いデータ量が多い画面用に幅を広げる */
+.container-wide {
+	max-width: 1200px;
+}
+
+/* TOP画面のような、画面全体を縦横中央寄せする枠 */
+.hero {
+	min-height: 80vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
+
+.hero h1 {
+	margin-bottom: 24px;
+}
+
+/* ログイン・登録画面のような、見出し＋カードを横方向中央に置く枠 */
+.form-page {
+	padding-top: 60px;
+}
+
+.form-page h1 {
+	text-align: center;
+}
+
+.form-page form,
+.form-page .error-message {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.form-page p {
+	max-width: 480px;
+	margin: 16px auto 0 auto;
+	text-align: center;
+}
+
+/* タスク編集・新規登録画面のような、カード無し・幅広・左寄せの画面用 */
+.form-plain h1 {
+	text-align: left;
+}
+
+.form-plain form {
+	background: none;
+	box-shadow: none;
+	border-radius: 0;
+	padding: 0;
+	max-width: none;
+}
+
+/* 共通ボタン（リンクをボタン風に見せる） */
+.btn {
+	display: inline-block;
+	padding: 10px 24px;
+	border-radius: 6px;
+	color: #ffffff;
+	font-weight: bold;
+	text-decoration: none;
+	border: none;
+	cursor: pointer;
+	margin: 0 6px;
+}
+
+.btn:hover {
+	text-decoration: none;
+}
+
+.btn-blue {
+	background-color: #4a69bd;
+}
+
+.btn-blue:hover {
+	background-color: #3c58a8;
+}
+
+.btn-green {
+	background-color: #27ae60;
+}
+
+.btn-green:hover {
+	background-color: #219150;
 }
 
 /* フォーム */
@@ -59,6 +137,14 @@ form textarea {
 form textarea {
 	min-height: 80px;
 	resize: vertical;
+}
+
+/* ログイン・登録画面のような、入力欄いっぱいに広がるボタン */
+.btn-full {
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
+	margin-top: 8px;
 }
 
 .btn-cancel {
@@ -101,16 +187,16 @@ a:hover {
 	text-decoration: underline;
 }
 
-.actions {
-	margin-bottom: 16px;
+/* 一覧テーブル（横幅が狭い画面では横スクロール） */
+.table-wrapper {
+	overflow-x: auto;
+	background-color: #ffffff;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* 一覧テーブル */
 table {
 	width: 100%;
 	border-collapse: collapse;
-	background-color: #ffffff;
-	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
 
 table th,
@@ -124,6 +210,16 @@ table td {
 table th {
 	background-color: #2f3542;
 	color: #ffffff;
+	white-space: nowrap;
+}
+
+table td:first-child,
+table td:nth-child(5),
+table td:nth-child(6),
+table td:nth-child(7),
+table td:nth-child(8),
+table td:last-child {
+	white-space: nowrap;
 }
 
 table tr:hover {
@@ -190,12 +286,23 @@ table button {
 	border-radius: 6px;
 	padding: 16px 20px;
 	margin-bottom: 20px;
+	text-align: center;
 }
 
-/* ページャー */
-.pagination {
+/* ページャーと新規作成ボタンを同じ行に並べる */
+.list-footer {
 	margin: 20px 0;
+}
+
+.new-task-row {
+	text-align: right;
+	margin-top: 16px;
+}
+
+/* ページャー（単独の行として中央配置） */
+.pagination {
 	display: flex;
+	justify-content: center;
 	gap: 10px;
 	align-items: center;
 }

@@ -6,24 +6,23 @@
 <title>タスク新規登録</title>
 </head>
 <body>
-	<div class="container">
+	<div class="container form-plain">
 		<h1>タスク新規登録</h1>
-		
+
 		<form action="/tasks" method="post">
-			<label>タイトル：<input type="text" name="title"></label>
+			<label>タイトル<input type="text" name="title"></label>
 			<br>
-			<label>内容：<textarea name="content"></textarea></label>
+			<label>内容<textarea name="content"></textarea></label>
 			<br>
-			<label>名前：<input type="text" name="name"></label>
+			<label>登録者<input type="text" name="name"></label>
 			<br>
-			<label>開始日：<input type="date" name="startDate"></label>
+			<label>開始日<input type="date" name="startDate"></label>
 			<br>
-			<label>終了日：<input type="date" name="endDate"></label>
+			<label>終了日<input type="date" name="endDate"></label>
 			<br>
-			<button type="submit">完了</button>		
+			<button type="submit">完了</button>
+			<a href="/tasks" class="btn-cancel">← キャンセル</a>
 		</form>
-		
-		<p><a href="/tasks">一覧に戻る</a></p>
 	</div>
 </body>
 </html>
