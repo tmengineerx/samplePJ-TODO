@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="/css/style.css">
 <meta charset="UTF-8">
 <title>ユーザー登録</title>
 </head>
 <body>
-	<h1>ユーザー登録</h1>
-	
-	<form action="/register" method="post">
-		<label>ユーザー名：<input type="text" name="username"></label>
-		<br>
-		<label>パスワード：<input type="password" name="password"></label>
-		<br>
-		<button type="submit">登録</button>
-	</form>
-	
-	<p><a href="/login">ログインはこちら</a></p>
+	<div class="container">
+		<h1>ユーザー登録</h1>
+		
+		<form action="/register" method="post">
+			<label>ユーザー名：<input type="text" name="username"></label>
+			<br>
+			<label>パスワード：<input type="password" name="password"></label>
+			<br>
+			<button type="submit">登録</button>
+		</form>
+		
+		<p><a href="/login">ログインはこちら</a></p>
+	</div>
 </body>
 </html>

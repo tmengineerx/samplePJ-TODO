@@ -1,0 +1,119 @@
+body {
+	font-family: "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+	background-color: #f5f6fa;
+	color: #2f3542;
+	margin: 0;
+	padding: 0;
+}
+
+h1 {
+	background-color: #2f3542;
+	color: #ffffff;
+	margin: 0;
+	padding: 20px 30px;
+	font-size: 24px;
+}
+
+.container {
+	max-width: 900px;
+	margin: 30px auto;
+	padding: 0 20px;
+}
+
+/* フォーム */
+form {
+	background-color: #ffffff;
+	border-radius: 8px;
+	padding: 24px;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+	max-width: 480px;
+}
+
+form label {
+	display: block;
+	margin-bottom: 16px;
+	font-weight: bold;
+}
+
+form input[type="text"],
+form input[type="password"],
+form input[type="date"],
+form textarea {
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
+	margin-top: 6px;
+	padding: 8px 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	font-size: 14px;
+}
+
+form textarea {
+	min-height: 80px;
+	resize: vertical;
+}
+
+button {
+	background-color: #4a69bd;
+	color: #ffffff;
+	border: none;
+	border-radius: 4px;
+	padding: 10px 20px;
+	font-size: 14px;
+	cursor: pointer;
+}
+
+button:hover {
+	background-color: #3c58a8;
+}
+
+/* リンク */
+a {
+	color: #4a69bd;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+.actions {
+	margin-bottom: 16px;
+}
+
+/* 一覧テーブル */
+table {
+	width: 100%;
+	border-collapse: collapse;
+	background-color: #ffffff;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+table th,
+table td {
+	padding: 10px 12px;
+	border-bottom: 1px solid #eee;
+	text-align: left;
+	font-size: 14px;
+}
+
+table th {
+	background-color: #eef1f7;
+}
+
+table tr:hover {
+	background-color: #f9fafc;
+}
+
+table form {
+	box-shadow: none;
+	padding: 0;
+	background: none;
+	display: inline;
+}
+
+table button {
+	padding: 4px 10px;
+	font-size: 13px;
+}
