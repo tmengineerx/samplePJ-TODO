@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import sample.common.dao.entity.Task;
 import sample.service.TaskService;
@@ -26,10 +27,14 @@ public class TaskController {
 	}
 	
 	@GetMapping()
-	public String list(HttpSession session, Model model) {
+	public String list(@RequestParam(defaultValue = "1") int page, HttpSession session, Model model) {
 		String username = (String) session.getAttribute("username");
-		List<Task> tasks = taskService.findByUsername(username);
+		List<Task> tasks = taskService.findByUsername(username, page);
+		int totalCount = taskService.countByUsername(username);
+		int totalPages = (int) Math.ceil((double) totalCount / 10);
 		model.addAttribute("tasks", tasks);
+		model.addAttribute("currentPage", page);
+		model.addAttribute("totalPages", totalPages);
 		return "tasks/list";
 	}
 	

@@ -29,10 +29,14 @@ java.security.MessageDigest.getInstance("SHA-256");
 	}
 	
 	@Override
-	public void register(Login login) {
+	public boolean register(Login login) {
+		if (loginDao.findByUsername(login.getUsername()) != null) {
+			return false;
+		}
 		String hashed = hash(login.getPassword());
 		login.setPassword(hashed);
 		loginDao.insert(login);
+		return true;
 	}
 	
 	@Override

@@ -7,11 +7,18 @@ body {
 }
 
 h1 {
+	color: #2f3542;
+	margin: 0 0 20px 0;
+	font-size: 24px;
+}
+
+/* タスク一覧のような、濃い背景の見出し用 */
+h1.page-header {
 	background-color: #2f3542;
 	color: #ffffff;
-	margin: 0;
+	margin: 0 0 20px 0;
 	padding: 20px 30px;
-	font-size: 24px;
+	border-radius: 8px;
 }
 
 .container {
@@ -52,6 +59,22 @@ form textarea {
 form textarea {
 	min-height: 80px;
 	resize: vertical;
+}
+
+.btn-cancel {
+	display: inline-block;
+	background-color: #7f8c8d;
+	color: #ffffff;
+	border: none;
+	border-radius: 4px;
+	padding: 10px 20px;
+	font-size: 14px;
+	margin-left: 8px;
+}
+
+.btn-cancel:hover {
+	background-color: #6c7778;
+	text-decoration: none;
 }
 
 button {
@@ -99,7 +122,8 @@ table td {
 }
 
 table th {
-	background-color: #eef1f7;
+	background-color: #2f3542;
+	color: #ffffff;
 }
 
 table tr:hover {
@@ -116,4 +140,74 @@ table form {
 table button {
 	padding: 4px 10px;
 	font-size: 13px;
+}
+
+/* 編集・削除ボタン */
+.btn-edit,
+.btn-delete {
+	display: inline-block;
+	padding: 4px 10px;
+	border-radius: 4px;
+	font-size: 13px;
+	color: #ffffff;
+	text-decoration: none;
+	border: none;
+	cursor: pointer;
+}
+
+.btn-edit {
+	background-color: #4a69bd;
+	margin-right: 6px;
+}
+
+.btn-edit:hover {
+	background-color: #3c58a8;
+	text-decoration: none;
+}
+
+.btn-delete {
+	background-color: #e55039;
+}
+
+.btn-delete:hover {
+	background-color: #c8432c;
+}
+
+/* エラーメッセージ */
+.error-message {
+	background-color: #ffe0e0;
+	color: #c0392b;
+	border-radius: 6px;
+	padding: 12px 16px;
+	margin-bottom: 16px;
+	max-width: 480px;
+	font-weight: bold;
+}
+
+/* 空状態メッセージ */
+.empty-state {
+	background-color: #d6ecff;
+	border-radius: 6px;
+	padding: 16px 20px;
+	margin-bottom: 20px;
+}
+
+/* ページャー */
+.pagination {
+	margin: 20px 0;
+	display: flex;
+	gap: 10px;
+	align-items: center;
+}
+
+.pagination strong {
+	background-color: #4a69bd;
+	color: #ffffff;
+	padding: 4px 10px;
+	border-radius: 4px;
+}
+
+.pagination .disabled {
+	color: #b2bec3;
+	cursor: not-allowed;
 }

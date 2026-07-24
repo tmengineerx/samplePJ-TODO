@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import sample.common.dao.entity.Login;
 import sample.service.LoginService;
@@ -31,16 +32,22 @@ public class LoginController {
 	}
 	
 	@PostMapping("/register")
-	public String register(@ModelAttribute Login login) {
-		loginService.register(login);
+	public String register(@ModelAttribute Login login, RedirectAttributes redirectAttributes) {
+		boolean success = loginService.register(login);
+		if (!success) {
+			redirectAttributes.addFlashAttribute("error", "そのユーザー名は既に使用されています");
+			return "redirect:/register";
+		}
 		return "redirect:/login";
 	}
 	
 	@PostMapping("/login")
 	public String login(@RequestParam String username,
-	@RequestParam String password, HttpSession session) {
+	@RequestParam String password, HttpSession session,
+	RedirectAttributes redirectAttributes) {
 		Login login = loginService.authenticate(username, password);
 		if (login == null) {
+			redirectAttributes.addFlashAttribute("error", "ユーザー名またはパスワードが正しくありません");
 			return "redirect:/login";
 		}
 		session.setAttribute("username", login.getUsername());

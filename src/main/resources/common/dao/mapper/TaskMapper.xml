@@ -6,12 +6,20 @@
   
 <mapper namespace="sample.common.dao.mapper.TaskMapper">
 
-    <!-- 一覧取得 -->
+    <!-- 一覧取得 (ページング対応)-->
     <select id="findByUsername" resultType="sample.common.dao.entity.Task">
     	SELECT *
     	FROM tasks
     	WHERE username = #{username}
     	ORDER BY id DESC
+    	LIMIT #{limit} OFFSET #{offset}
+    </select>
+    
+    <!-- 件数取得 -->
+    <select id="countByUsername" resultType="int">
+    	SELECT COUNT(*)
+    	FROM tasks
+    	WHERE username = #{username}
     </select>
 
     <!-- 1件取得 -->

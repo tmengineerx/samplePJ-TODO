@@ -11,8 +11,12 @@ import sample.common.dao.entity.Task;
 public interface TaskMapper {
 	// 一覧取得
 	List<Task> findByUsername(
-			@Param("username") String username
+			@Param("username") String username,
+			@Param("limit") int limit,
+			@Param("offset") int offset
 	);
+	
+	int countByUsername(@Param("username") String username);
 	
 	// 1件取得
 	Task findById(
