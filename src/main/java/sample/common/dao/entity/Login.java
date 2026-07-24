@@ -2,15 +2,15 @@ package sample.common.dao.entity;
 
 import java.time.LocalDateTime;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+
 public class Login {
 
 	private Long id;
-	private String username;
-	private String password;
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
 
-	// id
 	public Long getId() {
 		return id;
 	}
@@ -18,8 +18,11 @@ public class Login {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	@NotBlank(message = "ユーザー名を入力してください")
+	@Pattern(regexp = "^[a-zA-Z0-9]+$", message = "ユーザー名は半角英数字で入力してください")
+	private String username;
 
-	// username
 	public String getUsername() {
 		return username;
 	}
@@ -27,8 +30,11 @@ public class Login {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
-	// password
+	
+	@NotBlank(message = "パスワードを入力してください")
+	@Pattern(regexp = "^[a-zA-Z0-9]+$", message = "パスワードは半角英数字で入力してください")
+	private String password;
+	
 	public String getPassword() {
 		return password;
 	}
@@ -37,7 +43,6 @@ public class Login {
 		this.password = password;
 	}
 
-	// createdAt
 	public LocalDateTime getCreatedAt() {
 		return createdAt;
 	}
@@ -46,7 +51,6 @@ public class Login {
 		this.createdAt = createdAt;
 	}
 
-	// updatedAt
 	public LocalDateTime getUpdatedAt() {
 		return updatedAt;
 	}
