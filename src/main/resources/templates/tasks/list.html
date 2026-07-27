@@ -62,7 +62,9 @@
 			</div>
 		</div>
 
-		<p><a href="/logout">ログアウト</a></p>
+		<form th:action="@{/logout}" method="post" class="logout-form">
+			<button type="submit" class="btn-link">ログアウト</button>
+		</form>
 	</div>
 </body>
 </html>

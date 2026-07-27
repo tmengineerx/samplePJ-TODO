@@ -9,7 +9,7 @@
 	<div class="container form-plain">
 		<h1>タスク新規登録</h1>
 
-		<form action="/tasks" method="post">
+		<form th:action="@{/tasks}" method="post">
 			<label>タイトル<input type="text" name="title"></label>
 			<br>
 			<label>内容<textarea name="content"></textarea></label>

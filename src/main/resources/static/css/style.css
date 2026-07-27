@@ -6,6 +6,26 @@ body {
 	padding: 0;
 }
 
+/* ボタンをリンクのような見た目にする（ログアウトなど） */
+.logout-form {
+	display: inline;
+}
+
+.btn-link {
+	background: none;
+	border: none;
+	padding: 0;
+	color: #4a69bd;
+	text-decoration: none;
+	cursor: pointer;
+	font-size: inherit;
+	font-family: inherit;
+}
+
+.btn-link:hover {
+	text-decoration: underline;
+}
+
 h1 {
 	color: #2f3542;
 	margin: 0 0 20px 0;
