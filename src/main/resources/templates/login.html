@@ -10,7 +10,7 @@
 		<h1>ログイン</h1>
 		
 		<div class="error-message" th:if="${error}" th:text="${error}"></div>
-		<form action="/login" method="post">
+		<form th:action="@{/login}" method="post">
 			<label>ユーザー名：<input type="text" name="username"></label>
 			<br>
 			<label>パスワード：<input type="password" name="password"></label>

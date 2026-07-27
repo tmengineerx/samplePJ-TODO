@@ -1,5 +1,6 @@
 package sample.thymeleaf.web;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
@@ -33,9 +34,10 @@ public class LoginController {
 	public String registerForm() {
 		return "register";
 	}
-	
+
 	@PostMapping("/register")
-	public String register(@Valid @ModelAttribute Login login, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
+	public String register(@Valid @ModelAttribute Login login, BindingResult bindingResult, Model model,
+			RedirectAttributes redirectAttributes) {
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("error", "ユーザー名・パスワードは半角英数字で入力してください");
 			return "register";
@@ -47,21 +49,28 @@ public class LoginController {
 		}
 		return "redirect:/login";
 	}
-	
+
 	@PostMapping("/login")
 	public String login(@RequestParam String username,
-	@RequestParam String password, HttpSession session,
-	RedirectAttributes redirectAttributes) {
+			@RequestParam String password,
+			HttpServletRequest request,
+			RedirectAttributes redirectAttributes) {
 		Login login = loginService.authenticate(username, password);
 		if (login == null) {
 			redirectAttributes.addFlashAttribute("error", "ユーザー名またはパスワードが正しくありません");
 			return "redirect:/login";
 		}
-		session.setAttribute("username", login.getUsername());
+		// セッション固定攻撃対策: ログイン成功時に必ずセッションを作り直す
+		HttpSession oldSession = request.getSession(false);
+		if (oldSession != null) {
+			oldSession.invalidate();
+		}
+		HttpSession newSession = request.getSession(true);
+		newSession.setAttribute("username", login.getUsername());
 		return "redirect:/tasks";
 	}
-	
-	@GetMapping("/logout")
+
+	@PostMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/login";
