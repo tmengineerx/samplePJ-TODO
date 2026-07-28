@@ -9,11 +9,11 @@
 	<div class="container container-wide">
 		<h1>タスク一覧</h1>
 
-		<div class="empty-state" th:if="${#lists.isEmpty(tasks)}">
+		<div class="empty-state" th:if="${#lists.isEmpty(page.items)}">
 			💬 現在タスクは登録されていません。「新規作成」から追加してください。
 		</div>
 
-		<div class="table-wrapper" th:unless="${#lists.isEmpty(tasks)}">
+		<div class="table-wrapper" th:unless="${#lists.isEmpty(page.items)}">
 			<table>
 				<tr>
 					<th>ID</th>
@@ -26,7 +26,7 @@
 					<th>更新日時</th>
 					<th>操作</th>
 				</tr>
-				<tr th:each="task : ${tasks}">
+				<tr th:each="task : ${page.items}">
 					<td th:text="${task.id}"></td>
 					<td th:text="${task.title}"></td>
 					<td th:text="${task.content}"></td>
@@ -46,16 +46,16 @@
 		</div>
 
 		<div class="list-footer">
-			<div class="pagination" th:if="${totalPages >= 1}">
-				<a th:if="${currentPage > 1}" th:href="@{/tasks(page=${currentPage - 1})}">« 前</a>
-				<span th:unless="${currentPage > 1}" class="disabled">« 前</span>
+			<div class="pagination" th:if="${page.totalPages}">
+				<a th:if="${page.hasPrevious()}" th:href="@{/tasks(page=${page.currentPage - 1})}">« 前</a>
+				<span th:unless="${page.hasPrevious()}" class="disabled">« 前</span>
 
-				<span th:each="p : ${#numbers.sequence(1, totalPages)}">
-					<a th:if="${p != currentPage}" th:href="@{/tasks(page=${p})}" th:text="${p}"></a>
-					<strong th:if="${p == currentPage}" th:text="${p}"></strong>
+				<span th:each="p : ${#numbers.sequence(1, page.totalPages)}">
+					<a th:if="${p != page.currentPage}" th:href="@{/tasks(page=${p})}" th:text="${p}"></a>
+					<strong th:if="${p == page.currentPage}" th:text="${p}"></strong>
 				</span>
-				<a th:if="${currentPage < totalPages}" th:href="@{/tasks(page=${currentPage + 1})}">次 »</a>
-				<span th:unless="${currentPage < totalPages}" class="disabled">次 »</span>
+				<a th:if="${page.hasNext()}" th:href="@{/tasks(page=${page.currentPage + 1})}">次 »</a>
+				<span th:unless="${page.hasNext()}" class="disabled">次 »</span>
 			</div>
 			<div class="new-task-row">
 				<a href="/tasks/new" class="btn btn-green">＋新規作成</a>
