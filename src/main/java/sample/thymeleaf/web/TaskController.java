@@ -62,7 +62,7 @@ public class TaskController {
 	@GetMapping("/edit/{id}")
 	public String editForm(@PathVariable Long id, HttpSession session, Model model) {
 		String username = SessionKeys.currentUsername(session);
-		Task task = taskService.findById(id, username);
+		Task task = taskService.findOwnedTask(id, username);
 		TaskForm form = new TaskForm();
 		form.setTitle(task.getTitle());
 		form.setContent(task.getContent());

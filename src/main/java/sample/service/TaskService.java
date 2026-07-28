@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import sample.common.dao.entity.Task;
 import sample.common.dao.mapper.TaskMapper;
 import sample.service.dto.PageResult;
+import sample.common.exception.TaskNotFoundException;
 
 @Service
 public class TaskService {
@@ -32,8 +33,13 @@ public class TaskService {
 	}
 
 	// SELECT 1件
-	public Task findById(Long id, String username) {
-		return taskMapper.findById(id, username);
+	@Transactional(readOnly = true)
+	public Task findOwnedTask(Long id, String username) {
+		Task task = taskMapper.findById(id, username);
+		if (task == null) {
+			throw new TaskNotFoundException(id);
+		}
+		return task;
 	}
 
 	// INSERT
@@ -42,12 +48,20 @@ public class TaskService {
 	}
 
 	// UP DATE
-	public int update(Task task) {
-		return taskMapper.update(task);
+	@Transactional
+	public void update(Task task) {
+		int updated = taskMapper.update(task);
+		if (updated == 0) {
+			throw new TaskNotFoundException(task.getId());
+		}
 	}
 
 	// DELETE
-	public int delete(Long id, String username) {
-		return taskMapper.delete(id, username);
+	@Transactional
+	public void delete(Long id, String username) {
+		int deleted = taskMapper.delete(id, username);
+		if (deleted == 0) {
+			throw new TaskNotFoundException(id);
+		}
 	}
 }
