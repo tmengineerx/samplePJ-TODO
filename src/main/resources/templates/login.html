@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <link rel="stylesheet" href="/css/style.css">
 <meta charset="UTF-8">
@@ -9,12 +9,23 @@
 	<div class="container form-page">
 		<h1>ログイン</h1>
 		
-		<div class="error-message" th:if="${error}" th:text="${error}"></div>
-		<form th:action="@{/login}" method="post">
-			<label>ユーザー名：<input type="text" name="username"></label>
-			<br>
-			<label>パスワード：<input type="password" name="password"></label>
-			<br>
+		<div class="info-message" th:if="${param.registered}">
+			ユーザー登録が完了しました。ログインしてください。
+		</div>
+		
+		<form th:action="@{/login}" th:object="${loginForm}" method="post">
+			<div class="error-message" th:if="${#fields.hasGlobalErrors()}">
+				<p th:each="err : ${#fields.globalErrors()}" th:text="${err}"></p>
+			</div>
+			
+			<label for="username">ユーザー名：</label>
+				<input id="username" type="text" th:field="*{username}">
+			<span class="field-error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+
+			<label for="password">パスワード：</label>
+				<input id="password" type="password" th:field="*{password}">
+			<span class="field-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+			
 			<button type="submit" class="btn-full">ログイン</button>
 		</form>
 		

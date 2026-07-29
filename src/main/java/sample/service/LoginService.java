@@ -7,6 +7,7 @@ import org.springframework.dao.DuplicateKeyException;
 
 import sample.common.dao.mapper.LoginMapper;
 import sample.common.dao.entity.Login;
+import sample.thymeleaf.web.form.RegisterForm;
 
 @Service
 public class LoginService {
@@ -22,11 +23,13 @@ public class LoginService {
 	}
 
 	@Transactional
-	public boolean register(Login login) {
-		if (loginMapper.findByUsername(login.getUsername()) != null) {
+	public boolean register(RegisterForm form) {
+		if (loginMapper.findByUsername(form.getUsername()) != null) {
 			return false;
 		}
-		login.setPassword(passwordEncoder.encode(login.getPassword()));
+		Login login = new Login();
+		login.setUsername(form.getUsername());
+		login.setPassword(passwordEncoder.encode(form.getPassword()));
 		try {
 			loginMapper.insert(login);
 		} catch (DuplicateKeyException e) {

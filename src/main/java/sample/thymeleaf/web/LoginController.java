@@ -10,12 +10,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import sample.common.dao.entity.Login;
 import sample.service.LoginService;
 import sample.common.logic.SessionKeys;
+import sample.thymeleaf.web.form.LoginForm;
+import sample.thymeleaf.web.form.RegisterForm;
 
 @Controller
 public class LoginController {
@@ -27,39 +27,39 @@ public class LoginController {
 	}
 
 	@GetMapping("/login")
-	public String loginForm() {
+	public String loginForm(Model model) {
+		model.addAttribute("loginForm", new LoginForm());
 		return "login";
 	}
 
 	@GetMapping("/register")
-	public String registerForm() {
+	public String registerForm(Model model) {
+		model.addAttribute("registerForm", new RegisterForm());
 		return "register";
 	}
 
 	@PostMapping("/register")
-	public String register(@Valid @ModelAttribute Login login, BindingResult bindingResult, Model model,
-			RedirectAttributes redirectAttributes) {
+	public String register(@Valid @ModelAttribute("registerForm") RegisterForm form, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
-			model.addAttribute("error", "ユーザー名・パスワードは半角英数字で入力してください");
 			return "register";
 		}
-		boolean success = loginService.register(login);
-		if (!success) {
-			redirectAttributes.addFlashAttribute("error", "そのユーザー名は既に使用されています");
-			return "redirect:/register";
+		if (!loginService.register(form)) {
+			bindingResult.rejectValue("username", "duplicate", "そのユーザー名は既に使用されています");
+			return "register";
 		}
-		return "redirect:/login";
+		return "redirect:/login?registered";
 	}
 
 	@PostMapping("/login")
-	public String login(@RequestParam String username,
-			@RequestParam String password,
-			HttpServletRequest request,
-			RedirectAttributes redirectAttributes) {
-		Login login = loginService.authenticate(username, password);
+	public String login(@Valid @ModelAttribute("loginForm") LoginForm form, BindingResult bindingResult,
+			HttpServletRequest request) {
+		if (bindingResult.hasErrors()) {
+			return "login";
+		}
+		Login login = loginService.authenticate(form.getUsername(), form.getPassword());
 		if (login == null) {
-			redirectAttributes.addFlashAttribute("error", "ユーザー名またはパスワードが正しくありません");
-			return "redirect:/login";
+			bindingResult.reject("authFailed", "ユーザー名またはパスワードが正しくありません");
+			return "login";
 		}
 		// セッション固定攻撃対策: ログイン成功時に必ずセッションを作り直す
 		HttpSession oldSession = request.getSession(false);
