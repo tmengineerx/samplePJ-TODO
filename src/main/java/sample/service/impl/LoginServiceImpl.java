@@ -3,6 +3,7 @@ package sample.service.impl;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.dao.DuplicateKeyException;
 
 import sample.common.dao.LoginDao;
 import sample.common.dao.entity.Login;
@@ -13,12 +14,12 @@ public class LoginServiceImpl implements LoginService {
 
 	private final LoginDao loginDao;
 	private final PasswordEncoder passwordEncoder;
-	private final String dummyHash; 
+	private final String dummyHash;
 
 	public LoginServiceImpl(LoginDao loginDao, PasswordEncoder passwordEncoder) {
 		this.loginDao = loginDao;
 		this.passwordEncoder = passwordEncoder;
-		this.dummyHash = passwordEncoder.encode("dummy-password-for-timing-safety"); 
+		this.dummyHash = passwordEncoder.encode("dummy-password-for-timing-safety");
 	}
 
 	@Override
@@ -28,7 +29,11 @@ public class LoginServiceImpl implements LoginService {
 			return false;
 		}
 		login.setPassword(passwordEncoder.encode(login.getPassword()));
-		loginDao.insert(login);
+		try {
+			loginDao.insert(login);
+		} catch (DuplicateKeyException e) {
+			return false;
+		}
 		return true;
 	}
 

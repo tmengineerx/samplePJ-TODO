@@ -43,6 +43,7 @@ public class TaskService {
 	}
 
 	// INSERT
+	@Transactional
 	public int insert(Task task) {
 		return taskMapper.insert(task);
 	}
