@@ -44,13 +44,13 @@ public class TaskService {
 
 	// INSERT
 	@Transactional
-	public int insert(Task task) {
-		return taskMapper.insert(task);
+	public void create(Task task) {
+		taskMapper.insert(task);
 	}
 
 	// UP DATE
 	@Transactional
-	public void update(Task task) {
+	public void updateOwnedTask(Task task) {
 		int updated = taskMapper.update(task);
 		if (updated == 0) {
 			throw new TaskNotFoundException(task.getId());
@@ -59,7 +59,7 @@ public class TaskService {
 
 	// DELETE
 	@Transactional
-	public void delete(Long id, String username) {
+	public void deleteOwnedTask(Long id, String username) {
 		int deleted = taskMapper.delete(id, username);
 		if (deleted == 0) {
 			throw new TaskNotFoundException(id);
