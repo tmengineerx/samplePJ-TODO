@@ -55,7 +55,7 @@ public class TaskController {
 		task.setStartDate(form.getStartDate());
 		task.setEndDate(form.getEndDate());
 		task.setUsername(username);
-		taskService.insert(task);
+		taskService.create(task);
 		return "redirect:/tasks";
 	}
 
@@ -90,14 +90,14 @@ public class TaskController {
 		task.setName(form.getName());
 		task.setStartDate(form.getStartDate());
 		task.setEndDate(form.getEndDate());
-		taskService.update(task);
+		taskService.updateOwnedTask(task);
 		return "redirect:/tasks";
 	}
 
 	@PostMapping("/delete/{id}")
 	public String delete(@PathVariable Long id, HttpSession session) {
 		String username = SessionKeys.currentUsername(session);
-		taskService.delete(id, username);
+		taskService.deleteOwnedTask(id, username);
 		return "redirect:/tasks";
 	}
 }

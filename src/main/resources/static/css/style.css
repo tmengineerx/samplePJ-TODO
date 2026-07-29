@@ -75,7 +75,8 @@ h1 {
 }
 
 .form-page form,
-.form-page .error-message {
+.form-page .error-message,
+.form-page .info-message {
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -300,6 +301,17 @@ table button {
 .error-message {
 	background-color: #ffe0e0;
 	color: #c0392b;
+	border-radius: 6px;
+	padding: 12px 16px;
+	margin-bottom: 16px;
+	max-width: 480px;
+	font-weight: bold;
+}
+
+/* 登録完了などの成功メッセージ */
+.info-message {
+	background-color: #e3f6e8;
+	color: #1e824c;
 	border-radius: 6px;
 	padding: 12px 16px;
 	margin-bottom: 16px;
