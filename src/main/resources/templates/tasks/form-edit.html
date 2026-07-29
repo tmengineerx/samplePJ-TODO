@@ -9,16 +9,25 @@
 	<div class="container form-plain">
 		<h1>タスク編集</h1>
 
-		<form th:action="@{/tasks/update/{id}(id=${task.id})}" method="post">
-			<label>タイトル<input type="text" name="title" th:value="${task.title}"></label>
+		<form th:action="@{/tasks/update/{id}(id=${taskId})}" th:object="${taskForm}" method="post">
+				<label for="title">タイトル</label>
+				<input id="title" type="text" th:field="*{title}">
+				<span class="field-error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
 			<br>
-			<label>内容<textarea name="content" th:text="${task.content}"></textarea></label>
+				<label for="content">内容</label>
+				<textarea id="content" th:field="*{content}"></textarea>
+				<span class="field-error" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></span>
 			<br>
-			<label>登録者<input type="text" name="name" th:value="${task.name}"></label>
+				<label for="name">登録者</label>
+				<input id="name" type="text" th:field="*{name}">
+				<span class="field-error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
 			<br>
-			<label>開始日<input type="date" name="startDate" th:value="${task.startDate}"></label>
+				<label for="startDate">開始日</label>
+				<input id="startDate" type="date" th:field="*{startDate}">
 			<br>
-			<label>終了日<input type="date" name="endDate" th:value="${task.endDate}"></label>
+				<label for="endDate">終了日</label>
+				<input id="endDate" type="date" th:field="*{endDate}">
+				<span class="field-error" th:if="${#fields.hasErrors('validPeriod')}" th:errors="*{validPeriod}"></span>
 			<br>
 			<button type="submit">更新</button>
 			<a href="/tasks" class="btn-cancel">← キャンセル</a>

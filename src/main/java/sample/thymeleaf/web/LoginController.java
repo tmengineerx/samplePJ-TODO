@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import sample.common.dao.entity.Login;
 import sample.service.LoginService;
+import sample.common.logic.SessionKeys;
 
 @Controller
 public class LoginController {
@@ -66,7 +67,7 @@ public class LoginController {
 			oldSession.invalidate();
 		}
 		HttpSession newSession = request.getSession(true);
-		newSession.setAttribute("username", login.getUsername());
+		newSession.setAttribute(SessionKeys.USERNAME, login.getUsername());
 		return "redirect:/tasks";
 	}
 
