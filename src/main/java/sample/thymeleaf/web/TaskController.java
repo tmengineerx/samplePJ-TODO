@@ -51,7 +51,7 @@ public class TaskController {
 		Task task = new Task();
 		task.setTitle(form.getTitle());
 		task.setContent(form.getContent());
-		task.setName(form.getName());
+		task.setAssignee(form.getAssignee());
 		task.setStartDate(form.getStartDate());
 		task.setEndDate(form.getEndDate());
 		task.setUsername(username);
@@ -66,7 +66,7 @@ public class TaskController {
 		TaskForm form = new TaskForm();
 		form.setTitle(task.getTitle());
 		form.setContent(task.getContent());
-		form.setName(task.getName());
+		form.setAssignee(task.getAssignee());
 		form.setStartDate(task.getStartDate());
 		form.setEndDate(task.getEndDate());
 		model.addAttribute("taskForm", form);
@@ -87,7 +87,7 @@ public class TaskController {
 		task.setUsername(username);
 		task.setTitle(form.getTitle());
 		task.setContent(form.getContent());
-		task.setName(form.getName());
+		task.setAssignee(form.getAssignee());
 		task.setStartDate(form.getStartDate());
 		task.setEndDate(form.getEndDate());
 		taskService.updateOwnedTask(task);

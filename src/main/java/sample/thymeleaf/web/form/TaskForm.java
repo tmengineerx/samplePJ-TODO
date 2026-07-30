@@ -31,14 +31,14 @@ public class TaskForm {
     }
 
     @Size(max = 100, message = "名前は100文字以内で入力してください")
-    private String name;
+    private String assignee;
 
-    public String getName() {
-        return name;
+    public String getAssignee() {
+        return assignee;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAssignee(String assignee) {
+        this.assignee = assignee;
     }
 
     private LocalDate startDate;

@@ -6,9 +6,13 @@
   
 <mapper namespace="sample.common.dao.mapper.TaskMapper">
 
+	<sql id="taskColumns">
+		id, username, title, content, assignee, start_date, end_date, created_at, updated_at
+	</sql>
+
     <!-- 一覧取得 (ページング対応)-->
     <select id="findByUsername" resultType="sample.common.dao.entity.Task">
-    	SELECT *
+    	SELECT <include refid="taskColumns"/>
     	FROM tasks
     	WHERE username = #{username}
     	ORDER BY id DESC
@@ -24,7 +28,7 @@
 
     <!-- 1件取得 -->
     <select id="findById" resultType="sample.common.dao.entity.Task">
-		SELECT *
+		SELECT <include refid="taskColumns"/>
 		FROM tasks
 		WHERE id = #{id}
 			AND username = #{username}
@@ -36,7 +40,7 @@
 			username,
 			title,
 			content,
-			name,
+			assignee,
 			start_date,
 			end_date
 		)
@@ -44,7 +48,7 @@
 			#{username},
 			#{title},
 			#{content},
-			#{name},
+			#{assignee},
 			#{startDate},
 			#{endDate}
 		)
@@ -56,7 +60,7 @@
     	SET
     		title = #{title},
     		content = #{content},
-    		name = #{name},
+    		assignee = #{assignee},
     		start_date = #{startDate},
     		end_date = #{endDate}
     	WHERE id = #{id}

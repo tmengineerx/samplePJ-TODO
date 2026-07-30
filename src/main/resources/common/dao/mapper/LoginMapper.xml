@@ -8,20 +8,20 @@
 
     <!-- ユーザー名で1件取得（ログイン認証用） -->
     <select id="findByUsername" resultType="sample.common.dao.entity.Login">
-    	SELECT *
-    	FROM login
+    	SELECT id, username, password_hash, created_at, updated_at
+    	FROM users
     	WHERE username = #{username}
     </select>
 		
     <!-- 登録 -->
 	<insert id="insert">
-		INSERT INTO login(
+		INSERT INTO users(
 			username,
-			password
+			password_hash
 		)
 		VALUES(
 			#{username},
-			#{password}
+			#{passwordHash}
 		)
 	</insert>
 </mapper>

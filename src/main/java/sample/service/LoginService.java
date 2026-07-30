@@ -29,7 +29,7 @@ public class LoginService {
 		}
 		Login login = new Login();
 		login.setUsername(form.getUsername());
-		login.setPassword(passwordEncoder.encode(form.getPassword()));
+		login.setPasswordHash(passwordEncoder.encode(form.getPassword()));
 		try {
 			loginMapper.insert(login);
 		} catch (DuplicateKeyException e) {
@@ -45,7 +45,7 @@ public class LoginService {
 			passwordEncoder.matches(rawPassword, dummyHash);
 			return null;
 		}
-		if (!passwordEncoder.matches(rawPassword, login.getPassword())) {
+		if (!passwordEncoder.matches(rawPassword, login.getPasswordHash())) {
 			return null;
 		}
 		return login;
