@@ -3,14 +3,10 @@ GRANT USAGE ON SCHEMA public TO todo_app;
 
 -- アプリが必要とする DML のみ許可（DDL は許可しない）
 GRANT
-SELECT
-,
-INSERT
-,
-UPDATE
-,
-    DELETE ON tasks,
-    login TO todo_app;
+SELECT,
+INSERT,
+UPDATE,
+DELETE ON tasks,users TO todo_app;
 
 -- BIGSERIAL のシーケンス利用権限
 GRANT USAGE,

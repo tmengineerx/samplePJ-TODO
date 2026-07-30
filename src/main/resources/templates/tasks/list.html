@@ -3,6 +3,7 @@
 <head>
 <link rel="stylesheet" href="/css/style.css">
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>タスク一覧</title>
 </head>
 <body>
@@ -10,39 +11,49 @@
 		<h1>タスク一覧</h1>
 		<div class="error-message" th:if="${error}" th:text="${error}"></div>
 
+		<div class="header-bar">
+			<span th:text="|${username} さんのタスク|"></span>
+		</div>
+
 		<div class="empty-state" th:if="${#lists.isEmpty(page.items)}">
 			💬 現在タスクは登録されていません。「新規作成」から追加してください。
 		</div>
 
 		<div class="table-wrapper" th:unless="${#lists.isEmpty(page.items)}">
 			<table>
-				<tr>
-					<th>ID</th>
-					<th>タイトル</th>
-					<th>内容</th>
-					<th>登録者</th>
-					<th>開始日</th>
-					<th>終了日</th>
-					<th>作成日時</th>
-					<th>更新日時</th>
-					<th>操作</th>
-				</tr>
-				<tr th:each="task : ${page.items}">
-					<td th:text="${task.id}"></td>
-					<td th:text="${task.title}"></td>
-					<td th:text="${task.content}"></td>
-					<td th:text="${task.name}"></td>
-					<td th:text="${task.startDate}"></td>
-					<td th:text="${task.endDate}"></td>
-					<td th:text="${task.createdAt}"></td>
-					<td th:text="${task.updatedAt}"></td>
-					<td>
-						<a class="btn-edit" th:href="@{/tasks/edit/{id}(id=${task.id})}">編集</a>
-						<form th:action="@{/tasks/delete/{id}(id=${task.id})}" method="post">
-							<button type="submit" class="btn-delete">削除</button>
-						</form>
-					</td>
-				</tr>
+				<caption class="visually-hidden">登録済みタスクの一覧</caption>
+				<thead>
+					<tr>
+						<th scope="col">ID</th>
+						<th scope="col">タイトル</th>
+						<th scope="col">内容</th>
+						<th scope="col">登録者</th>
+						<th scope="col">開始日</th>
+						<th scope="col">終了日</th>
+						<th scope="col">作成日時</th>
+						<th scope="col">更新日時</th>
+						<th scope="col">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="task : ${page.items}">
+						<td th:text="${task.id}"></td>
+						<td th:text="${task.title}"></td>
+						<td th:text="${task.content}"></td>
+						<td th:text="${task.assignee}"></td>
+						<td th:text="${task.startDate != null ? #temporals.format(task.startDate,'yyyy/MM/dd') : '-'}"></td>
+						<td th:text="${task.endDate != null ? #temporals.format(task.endDate,'yyyy/MM/dd') : '-'}"></td>
+						<td th:text="${#temporals.format(task.createdAt, 'yyyy/MM/dd HH:mm')}"></td>
+						<td th:text="${#temporals.format(task.updatedAt, 'yyyy/MM/dd HH:mm')}"></td>
+						<td>
+							<a class="btn-edit" th:href="@{/tasks/edit/{id}(id=${task.id})}">編集</a>
+							<form th:action="@{/tasks/delete/{id}(id=${task.id})}" method="post"
+							onsubmit="return confirm('このタスクを削除します。よろしいですか？');">
+								<button type="submit" class="btn-delete">削除</button>
+							</form>
+						</td>
+					</tr>
+				</tbody>
 			</table>
 		</div>
 
@@ -59,7 +70,7 @@
 				<span th:unless="${page.hasNext()}" class="disabled">次 »</span>
 			</div>
 			<div class="new-task-row">
-				<a href="/tasks/new" class="btn btn-green">＋新規作成</a>
+				<a th:href="@{/tasks/new}" class="btn btn-green">＋新規作成</a>
 			</div>
 		</div>
 

@@ -3,6 +3,7 @@
 <head>
 <link rel="stylesheet" href="/css/style.css">
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>タスク新規登録</title>
 </head>
 <body>
@@ -18,9 +19,9 @@
 				<textarea id="content" th:field="*{content}"></textarea>
 				<span class="field-error" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></span>
 			<br>
-				<label for="name">登録者</label>
-				<input id="name" type="text" th:field="*{name}">
-				<span class="field-error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+				<label for="assignee">登録者</label>
+				<input id="assignee" type="text" th:field="*{assignee}">
+				<span class="field-error" th:if="${#fields.hasErrors('assignee')}" th:errors="*{assignee}"></span>
 			<br>
 				<label for="startDate">開始日</label>
 				<input id="startDate" type="date" th:field="*{startDate}">
@@ -30,7 +31,7 @@
 				<span class="field-error" th:if="${#fields.hasErrors('validPeriod')}" th:errors="*{validPeriod}"></span>
 			<br>
 			<button type="submit">完了</button>
-			<a href="/tasks" class="btn-cancel">← キャンセル</a>
+			<a th:href="@{/tasks}" class="btn-cancel">← キャンセル</a>
 		</form>
 	</div>
 </body>

@@ -1,4 +1,4 @@
-package sample.thymeleaf.web;
+package sample.web;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.validation.BindingResult;
 
-import sample.thymeleaf.web.form.TaskForm;
 import sample.common.dao.entity.Task;
 import sample.service.TaskService;
+import sample.web.form.TaskForm;
 import sample.common.logic.SessionKeys;
 
 @Controller
@@ -31,6 +31,7 @@ public class TaskController {
 	@GetMapping()
 	public String list(@RequestParam(defaultValue = "1") int page, HttpSession session, Model model) {
 		String username = SessionKeys.currentUsername(session);
+		model.addAttribute("username", username);
 		model.addAttribute("page", taskService.findPage(username, page));
 		return "tasks/list";
 	}
@@ -51,7 +52,7 @@ public class TaskController {
 		Task task = new Task();
 		task.setTitle(form.getTitle());
 		task.setContent(form.getContent());
-		task.setName(form.getName());
+		task.setAssignee(form.getAssignee());
 		task.setStartDate(form.getStartDate());
 		task.setEndDate(form.getEndDate());
 		task.setUsername(username);
@@ -66,7 +67,7 @@ public class TaskController {
 		TaskForm form = new TaskForm();
 		form.setTitle(task.getTitle());
 		form.setContent(task.getContent());
-		form.setName(task.getName());
+		form.setAssignee(task.getAssignee());
 		form.setStartDate(task.getStartDate());
 		form.setEndDate(task.getEndDate());
 		model.addAttribute("taskForm", form);
@@ -87,7 +88,7 @@ public class TaskController {
 		task.setUsername(username);
 		task.setTitle(form.getTitle());
 		task.setContent(form.getContent());
-		task.setName(form.getName());
+		task.setAssignee(form.getAssignee());
 		task.setStartDate(form.getStartDate());
 		task.setEndDate(form.getEndDate());
 		taskService.updateOwnedTask(task);

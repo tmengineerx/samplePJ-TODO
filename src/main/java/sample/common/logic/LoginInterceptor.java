@@ -14,7 +14,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws IOException {
 		if (SessionKeys.currentUsername(request.getSession()) == null) {
-			response.sendRedirect("/login");
+			response.sendRedirect(request.getContextPath() + "/login");
 			return false;
 		}
 		return true;

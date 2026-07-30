@@ -1,7 +1,7 @@
 package sample.common.dao.entity;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 public class Task {
 
@@ -9,11 +9,11 @@ public class Task {
 	private String username;
 	private String title;
 	private String content;
-	private String name;
+	private String assignee;
 	private LocalDate startDate;
 	private LocalDate endDate;
-	private LocalDateTime createdAt;
-	private LocalDateTime updatedAt;
+	private OffsetDateTime createdAt;
+	private OffsetDateTime updatedAt;
 
 	// id
 	public Long getId() {
@@ -51,13 +51,13 @@ public class Task {
 		this.content = content;
 	}
 
-	// name
-	public String getName() {
-		return name;
+	// assignee
+	public String getAssignee() {
+		return assignee;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setAssignee(String assignee) {
+		this.assignee = assignee;
 	}
 
 	// startDate
@@ -79,20 +79,20 @@ public class Task {
 	}
 
 	// createdAt
-	public LocalDateTime getCreatedAt() {
+	public OffsetDateTime getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(LocalDateTime createdAt) {
+	public void setCreatedAt(OffsetDateTime createdAt) {
 		this.createdAt = createdAt;
 	}
 
 	// updatedAt
-	public LocalDateTime getUpdatedAt() {
+	public OffsetDateTime getUpdatedAt() {
 		return updatedAt;
 	}
 
-	public void setUpdatedAt(LocalDateTime updatedAt) {
+	public void setUpdatedAt(OffsetDateTime updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 }
