@@ -10,6 +10,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import sample.common.dao.entity.Login;
 import sample.service.LoginService;
@@ -21,6 +23,7 @@ import sample.thymeleaf.web.form.RegisterForm;
 public class LoginController {
 
 	private final LoginService loginService;
+	private static final Logger log = LoggerFactory.getLogger(LoginController.class);
 
 	public LoginController(LoginService loginService) {
 		this.loginService = loginService;
@@ -58,9 +61,12 @@ public class LoginController {
 		}
 		Login login = loginService.authenticate(form.getUsername(), form.getPassword());
 		if (login == null) {
+			log.warn("login failed. username={}", form.getUsername());
 			bindingResult.reject("authFailed", "ユーザー名またはパスワードが正しくありません");
 			return "login";
 		}
+		log.info("login succeeded. username={}", login.getUsername());
+
 		// セッション固定攻撃対策: ログイン成功時に必ずセッションを作り直す
 		HttpSession oldSession = request.getSession(false);
 		if (oldSession != null) {

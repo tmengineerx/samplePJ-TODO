@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import sample.common.dao.entity.Task;
 import sample.common.dao.mapper.TaskMapper;
@@ -14,6 +16,7 @@ import sample.common.exception.TaskNotFoundException;
 public class TaskService {
 
 	private final TaskMapper taskMapper;
+	private static final Logger log = LoggerFactory.getLogger(TaskService.class);
 	private static final int PAGE_SIZE = 10;
 
 	public TaskService(TaskMapper taskMapper) {
@@ -58,7 +61,9 @@ public class TaskService {
 	public void deleteOwnedTask(Long id, String username) {
 		int deleted = taskMapper.delete(id, username);
 		if (deleted == 0) {
+			log.warn("delete rejected. id={}, username={}", id, username);
 			throw new TaskNotFoundException(id);
 		}
+		log.info("task deleted. id={}, username={}", id, username);
 	}
 }
