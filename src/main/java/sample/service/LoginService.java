@@ -6,8 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.dao.DuplicateKeyException;
 
 import sample.common.dao.mapper.LoginMapper;
+import sample.web.form.RegisterForm;
 import sample.common.dao.entity.Login;
-import sample.thymeleaf.web.form.RegisterForm;
 
 @Service
 public class LoginService {

@@ -1,4 +1,4 @@
-package sample.thymeleaf.web;
+package sample.web;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.validation.BindingResult;
 
-import sample.thymeleaf.web.form.TaskForm;
 import sample.common.dao.entity.Task;
 import sample.service.TaskService;
+import sample.web.form.TaskForm;
 import sample.common.logic.SessionKeys;
 
 @Controller

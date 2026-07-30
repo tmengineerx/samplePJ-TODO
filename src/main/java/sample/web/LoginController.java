@@ -1,4 +1,4 @@
-package sample.thymeleaf.web;
+package sample.web;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -15,9 +15,9 @@ import org.slf4j.LoggerFactory;
 
 import sample.common.dao.entity.Login;
 import sample.service.LoginService;
+import sample.web.form.LoginForm;
+import sample.web.form.RegisterForm;
 import sample.common.logic.SessionKeys;
-import sample.thymeleaf.web.form.LoginForm;
-import sample.thymeleaf.web.form.RegisterForm;
 
 @Controller
 public class LoginController {

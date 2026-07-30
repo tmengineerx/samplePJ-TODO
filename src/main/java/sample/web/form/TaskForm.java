@@ -1,4 +1,4 @@
-package sample.thymeleaf.web.form;
+package sample.web.form;
 
 import java.time.LocalDate;
 
