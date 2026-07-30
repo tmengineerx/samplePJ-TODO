@@ -32,7 +32,6 @@ public class TaskService {
 		return new PageResult<>(tasks, page, totalPages, totalCount);
 	}
 
-	// SELECT 1件
 	@Transactional(readOnly = true)
 	public Task findOwnedTask(Long id, String username) {
 		Task task = taskMapper.findById(id, username);
@@ -42,13 +41,11 @@ public class TaskService {
 		return task;
 	}
 
-	// INSERT
 	@Transactional
 	public void create(Task task) {
 		taskMapper.insert(task);
 	}
 
-	// UP DATE
 	@Transactional
 	public void updateOwnedTask(Task task) {
 		int updated = taskMapper.update(task);
@@ -57,7 +54,6 @@ public class TaskService {
 		}
 	}
 
-	// DELETE
 	@Transactional
 	public void deleteOwnedTask(Long id, String username) {
 		int deleted = taskMapper.delete(id, username);
