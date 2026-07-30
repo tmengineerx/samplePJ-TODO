@@ -3,6 +3,7 @@
 <head>
 <link rel="stylesheet" href="/css/style.css">
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ログイン</title>
 </head>
 <body>
@@ -29,7 +30,7 @@
 			<button type="submit" class="btn-full">ログイン</button>
 		</form>
 		
-		<p><a href="/register">ユーザー登録はこちら</a></p>
+		<p><a th:href="@{/register}">ユーザー登録はこちら</a></p>
 	</div>
 </body>
 </html>

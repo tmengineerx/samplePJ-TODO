@@ -31,6 +31,7 @@ public class TaskController {
 	@GetMapping()
 	public String list(@RequestParam(defaultValue = "1") int page, HttpSession session, Model model) {
 		String username = SessionKeys.currentUsername(session);
+		model.addAttribute("username", username);
 		model.addAttribute("page", taskService.findPage(username, page));
 		return "tasks/list";
 	}
